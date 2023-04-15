@@ -29,7 +29,7 @@ void CMainGame::Update()
 	system(" mode  con lines=50   cols=150 ");
 	m_Draw.Draw_Title();
 	system("pause");
-	PlaySound(TEXT("Data/Hearthstone-Main.wav"), 0, SND_FILENAME | SND_ASYNC);
+	PlaySound(TEXT("Data/Hearthstone-Main.wav"), 0, SND_FILENAME | SND_ASYNC | SND_LOOP);
 	system("cls");
 	Hand_Out();
 	while (true) {
