@@ -15,7 +15,7 @@ void CDraw::Draw_Title()
 	cout << "\n\n" << endl;
 	cout << "\t오! 제 초대장을 받으셨군요." << endl;
 	cout << "\t파티에 오신 걸 환영합니다!\n" << endl;
-	PlaySound(TEXT("Data/Hearthstone-Main.wav"), 0, SND_FILENAME | SND_ASYNC);
+	PlaySound(TEXT("Data/VO_INNKEEPER_INTRO_02.wav"), 0, SND_FILENAME | SND_ASYNC);
 }
 
 void CDraw::CursorView()
