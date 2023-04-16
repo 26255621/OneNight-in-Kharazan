@@ -3,10 +3,8 @@
 #include "Player.h"
 #include "Cards.h"
 
-CMainGame::CMainGame()
+CMainGame::CMainGame() : m_pUser(nullptr), m_p12Hour(nullptr)
 {
-	m_pUser = nullptr;
-	m_pUser = nullptr;
 }
 
 
@@ -33,17 +31,19 @@ void CMainGame::Update()
 	system("cls");
 	Hand_Out();
 	while (true) {
+		if (4 == m_pUser->Do_Select())
+			break;
 		if (0 >= m_p12Hour->Get_Player_Hp()) {
 			system("cls");
 			cout << "승리!" << endl;
+			break;
 		}
-		else if (0 >= m_pUser->Get_Player_Hp()) {
+		// Todo: 컴퓨터 플레잉
+		if (0 >= m_pUser->Get_Player_Hp()) {
 			system("cls");
 			cout << "게임 조까치 하네!" << endl;
+			break;
 		}
-		if (4 == m_pUser->Do_Select())
-			return;
-
 	}
 }
 
