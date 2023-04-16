@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "Draw.h"
 
-void CDraw::Draw_Title()
+void CDraw::Draw_Title() const
 {
 	cout << "\n\n" << endl;
 	cout << "\t#######                  #     #                                      #    #                                                  " << endl;
@@ -18,7 +18,7 @@ void CDraw::Draw_Title()
 	PlaySound(TEXT("Data/VO_INNKEEPER_INTRO_02.wav"), 0, SND_FILENAME | SND_ASYNC);
 }
 
-void CDraw::CursorView()
+void CDraw::CursorView() const
 {
 	CONSOLE_CURSOR_INFO cursorInfo = { 0, };
 	cursorInfo.dwSize = 1; //커서 굵기 (1 ~ 100)
@@ -26,7 +26,7 @@ void CDraw::CursorView()
 	SetConsoleCursorInfo(GetStdHandle(STD_OUTPUT_HANDLE), &cursorInfo);
 }
 
-int CDraw::Control() {
+int CDraw::Control() const {
 	int Key(0);
 	while (true) {
 		// 화살표 키를 누르면 224와 방향에 따른 수가 입력 되므로 한번더 _getch()를 한다.
@@ -77,7 +77,7 @@ int CDraw::Draw_Arrow(int iX, int iY, int iMinY, int iMaxY) {
 
 
 // 커서 위치 이동 함수
-void CDraw::gotoxy(int x, int y) {
+void CDraw::gotoxy(int x, int y) const {
 	COORD posXY = { (short)x, (short)y };
 	SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), posXY);
 }

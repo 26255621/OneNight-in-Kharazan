@@ -9,10 +9,10 @@
 class CDraw
 {
 public:
-	void Draw_Title();
-	void CursorView();
-	int Control();
+	void Draw_Title() const;
+	void CursorView() const;
+	int Control() const;
 	int Draw_Arrow(int iX, int iY, int iMinY = 0, int iMaxY = 0);
-	void gotoxy(int x, int y);
+	void gotoxy(int x, int y) const;
 };
 
