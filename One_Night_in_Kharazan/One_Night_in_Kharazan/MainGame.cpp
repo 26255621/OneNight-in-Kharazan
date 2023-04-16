@@ -39,7 +39,7 @@ void CMainGame::Update()
 			break;
 		}
 		// Todo: 컴퓨터 플레잉
-		// 히히 하하 호
+		// 노는게 제일 좋아
 		if (0 >= m_pUser->Get_Player_Hp()) {
 			system("cls");
 			cout << "게임 조까치 하네!" << endl;
