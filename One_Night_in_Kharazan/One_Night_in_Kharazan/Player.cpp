@@ -93,7 +93,10 @@ void CPlayer::Show_Field_Card()
 		++iCount;
 		cout << "-------------------------------------------------" << endl;
 		cout << iCount << " 번 카드 이름: " << setw(5) << Cursor->Get_Stat()->szName << endl;
-		cout << "공: " << Cursor->Get_Stat()->iAttack << "\t체: " << Cursor->Get_Stat()->iHp << "\t코스트: " << Cursor->Get_Stat()->iCost << '\n' << endl;
+		cout << "공: " << Cursor->Get_Stat()->iAttack << "\t체: " << Cursor->Get_Stat()->iHp << "\t코스트: " << Cursor->Get_Stat()->iCost << endl;
+		if (!Cursor->Get_Can_Attack())
+			cout << "Zzz" << endl;
+		cout << endl;
 		Cursor = Cursor->Get_Next_Card();
 	}
 	cout << endl;
@@ -121,6 +124,7 @@ int CPlayer::Do_Select(CPlayer* _Enemy_User, bool bCom)
 			break;
 		case 3:
 			Add_Card();
+			Set_Field_Cards();
 			return iSelect;
 		case 4:
 			return iSelect;
@@ -184,6 +188,16 @@ void CPlayer::Put_Card(bool bCom)
 	}
 }
 
+void CPlayer::Set_Field_Cards()
+{
+	CCards* Cursor(nullptr);
+	Cursor = m_pField_Head->Get_Next_Card();
+	while (Cursor) {
+		Cursor->Set_Can_Attack(true);
+		Cursor = Cursor->Get_Next_Card();
+	}
+}
+
 void CPlayer::Use_Field_Card(CPlayer* _Enemy_User)
 {
 	CCards* Cursor(nullptr);
@@ -200,6 +214,11 @@ void CPlayer::Use_Field_Card(CPlayer* _Enemy_User)
 			system("pause");
 			continue;
 		}
+		if (!Cursor->Get_Can_Attack()) {
+			cout << "이 하수인은 행동할수 없다!" << endl;
+			system("pause");
+			continue;
+		}
 		cout << "이 카드로 무엇을 행동하시겠습니까?" << endl;
 		cout << "1. 명치 공격 2. 하수인 공격" << endl;
 		cin >> iSelect;
@@ -207,6 +226,7 @@ void CPlayer::Use_Field_Card(CPlayer* _Enemy_User)
 		{
 		case 1:
 			_Enemy_User->Player_Damage(Cursor->Get_Stat()->iAttack);
+			Cursor->Set_Can_Attack(false);
 			break;
 		case 2:
 			cout << "하수인" << endl;

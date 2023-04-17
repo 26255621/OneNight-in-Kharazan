@@ -21,6 +21,7 @@ public:
 	CCards* Search_Card(CCards* _Head, int _iSelect);
 	void Put_Card(bool bCom = false);
 
+	void Set_Field_Cards();
 	void Use_Field_Card(CPlayer* _Enemy_User);
 
 public:

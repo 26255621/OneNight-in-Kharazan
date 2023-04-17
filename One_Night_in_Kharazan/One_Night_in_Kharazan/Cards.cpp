@@ -2,7 +2,7 @@
 #include "Cards.h"
 
 
-CCards::CCards() : m_pStat(nullptr), m_pNext(nullptr)
+CCards::CCards() : bCan_Attack(false), m_pStat(nullptr), m_pNext(nullptr)
 {
 }
 
@@ -34,9 +34,14 @@ void CCards::Release()
 	}
 }
 
-void CCards::Attack_User()
+void CCards::Set_Can_Attack(bool _bCan)
 {
+	bCan_Attack = _bCan;
+}
 
+bool CCards::Get_Can_Attack()
+{
+	return bCan_Attack;
 }
 
 void CCards::Set_Next_Card(CCards* _Next)
