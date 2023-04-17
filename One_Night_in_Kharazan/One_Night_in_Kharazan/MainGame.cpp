@@ -31,15 +31,14 @@ void CMainGame::Update()
 	system("cls");
 	Hand_Out();
 	while (true) {
-		if (4 == m_pUser->Do_Select())
-			break;
+		if (4 == m_pUser->Do_Select(m_p12Hour))
+			return;
 		if (0 >= m_p12Hour->Get_Player_Hp()) {
 			system("cls");
 			cout << "승리!" << endl;
 			break;
 		}
 		// Todo: 컴퓨터 플레잉
-		// 노는게 제일 좋아
 		if (0 >= m_pUser->Get_Player_Hp()) {
 			system("cls");
 			cout << "게임 조까치 하네!" << endl;

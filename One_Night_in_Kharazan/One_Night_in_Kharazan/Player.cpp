@@ -37,8 +37,6 @@ void CPlayer::Release()
 	}
 }
 
-
-
 void CPlayer::Player_Damage(int _iDamage)
 {
 	iPlayer_Hp -= _iDamage;
@@ -56,6 +54,15 @@ void CPlayer::Add_Card()
 	Card->Set_Next_Card(m_pHand_Head->Get_Next_Card());
 	m_pHand_Head->Set_Next_Card(Card);
 	++iHand_Count;
+}
+
+void CPlayer::Show_All(CPlayer* _Enemy_User)
+{
+	system("cls");
+	cout << "적 체력: " << _Enemy_User->Get_Player_Hp() << endl;
+	Show_Field_Card();
+	Show_Hand_Card();
+	cout << "내 체력: " << iPlayer_Hp << endl;
 }
 
 void CPlayer::Show_Hand_Card()
@@ -92,7 +99,7 @@ void CPlayer::Show_Field_Card()
 	cout << endl;
 }
 
-int CPlayer::Do_Select(bool bCom)
+int CPlayer::Do_Select(CPlayer* _Enemy_User, bool bCom)
 {
 	int iSelect(0);
 	if (10 != iPlayer_Cost) {
@@ -100,9 +107,7 @@ int CPlayer::Do_Select(bool bCom)
 	}
 	iHave_Cost = iPlayer_Cost;
 	while (true) {
-		system("cls");
-		Show_Field_Card();
-		Show_Hand_Card();
+		Show_All(_Enemy_User);
 		cout << "무엇을 하시겠습니까?" << endl;
 		cout << "1. 카드 놓기 2. 전장에 놓인 카드 사용하기(미완성) 3. 턴 종료 4. 게임 종료" << endl;
 		cin >> iSelect;
@@ -112,6 +117,7 @@ int CPlayer::Do_Select(bool bCom)
 			Put_Card();
 			break;
 		case 2:
+			Use_Field_Card(_Enemy_User);
 			break;
 		case 3:
 			Add_Card();
@@ -176,6 +182,40 @@ void CPlayer::Put_Card(bool bCom)
 		--iHand_Count;
 		++iField_Count;
 	}
+}
+
+void CPlayer::Use_Field_Card(CPlayer* _Enemy_User)
+{
+	CCards* Cursor(nullptr);
+	int iSelect(0);
+	while (true) {
+		Show_All(_Enemy_User);
+		cout << "몇 번 카드를 사용하시겠습니까? (돌아가기: 0)" << endl;
+		cin >> iSelect;
+		if (!iSelect)
+			return;
+		Cursor = Search_Card(m_pField_Head, --iSelect)->Get_Next_Card();
+		if(!Cursor || 0 > iSelect) {
+			cout << "얘! 그런 카드 없단다!" << endl;
+			system("pause");
+			continue;
+		}
+		cout << "이 카드로 무엇을 행동하시겠습니까?" << endl;
+		cout << "1. 명치 공격 2. 하수인 공격" << endl;
+		cin >> iSelect;
+		switch (iSelect)
+		{
+		case 1:
+			_Enemy_User->Player_Damage(Cursor->Get_Stat()->iAttack);
+			break;
+		case 2:
+			cout << "하수인" << endl;
+			break;
+		default:
+			break;
+		}
+	}
+
 }
 
 int CPlayer::Get_Player_Hp()

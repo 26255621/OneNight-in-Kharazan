@@ -34,6 +34,11 @@ void CCards::Release()
 	}
 }
 
+void CCards::Attack_User()
+{
+
+}
+
 void CCards::Set_Next_Card(CCards* _Next)
 {
 	m_pNext = _Next;

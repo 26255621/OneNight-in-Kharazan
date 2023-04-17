@@ -12,8 +12,10 @@ public:
 	void Update();
 	void Release();
 
-	void Set_Next_Card(CCards* _Next);
+	void Attack_User();
 
+public:
+	void Set_Next_Card(CCards* _Next);
 	void Set_Stat();
 	PStat Get_Stat();
 	CCards* Get_Next_Card();

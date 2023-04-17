@@ -14,11 +14,14 @@ public:
 
 	void Player_Damage(int _iDamage);
 	void Add_Card();
+	void Show_All(CPlayer* _Enemy_User);
 	void Show_Hand_Card();
 	void Show_Field_Card();
-	int Do_Select(bool bCom = false);
+	int Do_Select(CPlayer* _Enemy_User, bool bCom = false);
 	CCards* Search_Card(CCards* _Head, int _iSelect);
 	void Put_Card(bool bCom = false);
+
+	void Use_Field_Card(CPlayer* _Enemy_User);
 
 public:
 	int Get_Player_Hp();
